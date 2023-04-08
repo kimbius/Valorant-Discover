@@ -1,9 +1,8 @@
 import preprocess from "svelte-preprocess";
-import adapter from "@sveltejs/adapter-cloudflare-workers";
+import adapter from "@sveltejs/adapter-auto";
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-  checkOrigin: true,
   kit: {
     alias: { $lib: "./src/lib/", $components: "./src/lib/components/" },
     adapter: adapter(),

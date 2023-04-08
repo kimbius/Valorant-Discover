@@ -1,9 +1,9 @@
-import axios from 'axios';
+const buildURL = (baseUrl, resource) => {
+    if (typeof resource === 'string' && !resource.startsWith("https://")) {
+        resource = baseUrl + resource
+    }
+    return resource
+}
 
-export const api = axios.create({
-    baseURL: "https://vlrggapi.vercel.app/"
-})
-
-export const api2 = axios.create({
-    baseURL: "https://vlrgg.cyclic.app/api/"
-})
+export const api = (url) => buildURL("https://vlrggapi.vercel.app", url)
+export const api2 = (url) => buildURL("https://vlrgg.cyclic.app/api", url)

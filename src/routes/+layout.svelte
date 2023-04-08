@@ -7,6 +7,10 @@
   $: loading = !!$navigating;
 </script>
 
+<svelte:head>
+  <title>Valorant Discover</title>
+</svelte:head>
+
 <MainNavbar />
 <slot />
 

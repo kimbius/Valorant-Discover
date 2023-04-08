@@ -5,5 +5,5 @@ export async function load({ setHeaders }) {
     setHeaders({
         "cache-control": "max-age=30",
     });
-    return api2.get("/events").then(res => res.data)
+    return fetch(api2("/events")).then(res => res.json())
 }
