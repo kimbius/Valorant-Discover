@@ -60,7 +60,7 @@
         @apply flex flex-col py-4 lg:py-0;
     }
     .nav-lists {
-        @apply hidden h-full lg:flex;
+        @apply hidden h-full sm:flex;
     }
     .nav-lists > li.nav-lists-item {
         @apply p-4 text-main-300;

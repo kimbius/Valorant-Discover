@@ -6,6 +6,7 @@
     import Match from "$components/Match.svelte";
 
     $: ({ segments } = $page.data);
+
 </script>
 
 <MainHeader subtitle="MATCHES RESULTS" />
