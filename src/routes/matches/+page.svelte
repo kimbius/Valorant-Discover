@@ -1,25 +1,30 @@
 <script>
-    import Container from "$components/Container.svelte";
-    import MainHeader from "$components/MainHeader.svelte";
+  import Container from "$components/Container.svelte";
+  import MainHeader from "$components/MainHeader.svelte";
 
-    import { page } from "$app/stores";
-    import Match from "$components/Match.svelte";
+  import Match from "$components/Match.svelte";
+  import { onMount } from "svelte";
 
-    $: ({ segments } = $page.data);
+  let items = [];
 
+  onMount(async () => {
+    items = await fetch("https://vlr-gg-api.bius.work/matches?type=results")
+      .then((o) => o.json())
+      .then((o) => o.items);
+  });
 </script>
 
-<MainHeader subtitle="MATCHES RESULTS" />
+<MainHeader subtitle="MATCH RESULTS" />
 <div class="text-gray-800">
-    <Container>
-        <div class="py-8">
-            <ul class="grid md:grid-cols-2 gap-2">
-                {#each segments as segment}
-                    <li>
-                        <Match {segment} />
-                    </li>
-                {/each}
-            </ul>
-        </div>
-    </Container>
+  <Container>
+    <div class="py-8">
+      <ul class="grid md:grid-cols-2 gap-2">
+        {#each items as item}
+          <li>
+            <Match segment={item} />
+          </li>
+        {/each}
+      </ul>
+    </div>
+  </Container>
 </div>

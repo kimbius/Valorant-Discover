@@ -10,18 +10,18 @@
             title: "Matches",
             href: "/matches",
         },
-        {
-            title: "Events",
-            href: "/events",
-        },
-        {
-            title: "News",
-            href: "/news",
-        },
-        {
-            title: "Players",
-            href: "/players",
-        },
+        // {
+        //     title: "Events",
+        //     href: "/events",
+        // },
+        // {
+        //     title: "News",
+        //     href: "/news",
+        // },
+        // {
+        //     title: "Players",
+        //     href: "/players",
+        // },
     ];
 
     import Container from "../Container.svelte";
