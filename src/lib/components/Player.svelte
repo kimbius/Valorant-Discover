@@ -5,7 +5,7 @@
 <div class="overflow-hidden bg-gray-100 rounded h-full">
     <div class="relative bg-main-800 w-full h-14">
         <div
-            style:background-image="url('https://www.vlr.gg/img/base/ph/sil.png')"
+            style:background-image="url('/sil.png')"
             class="bg-center bg-cover shadow left-3 -bottom-4 rounded-full h-16 w-16 absolute bg-white"
         />
     </div>
