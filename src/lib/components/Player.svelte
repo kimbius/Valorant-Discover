@@ -1,5 +1,6 @@
-<script>
-    export let player = {};
+<script lang="ts">
+    import type { Player as PlayerData } from "$lib/types";
+    export let player: PlayerData;
 </script>
 
 <div class="overflow-hidden bg-gray-100 rounded h-full">
@@ -7,7 +8,7 @@
         <div
             style:background-image="url('/sil.png')"
             class="bg-center bg-cover shadow left-3 -bottom-4 rounded-full h-16 w-16 absolute bg-white"
-        />
+        ></div>
     </div>
     <div class="p-3 mt-4">
         <a

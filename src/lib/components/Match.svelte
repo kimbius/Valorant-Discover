@@ -1,16 +1,29 @@
-<script>
-    export let segment = {};
+<script lang="ts">
+    import { proxyImage } from "$lib/image";
+    import type { Match as MatchData } from "$lib/types";
 
-    let team_one_win = +segment.team_one.score > +segment.team_two.score;
-    let team_two_win = +segment.team_one.score < +segment.team_two.score;
+    export let segment: MatchData;
+
+    const fallbackImage = (event: Event) => {
+        const image = event.currentTarget as HTMLImageElement;
+        image.src = "/vlr.png";
+    };
+
+    let team_one_win = Number(segment.team_one.score ?? 0) > Number(segment.team_two.score ?? 0);
+    let team_two_win = Number(segment.team_one.score ?? 0) < Number(segment.team_two.score ?? 0);
 </script>
 
-<div class="relative overflow-hidden rounded h-full">
+<article class="relative block cursor-pointer overflow-hidden rounded h-full">
+    <a
+        class="card-hit-area"
+        href={`/matches/${segment.id}`}
+        aria-label={`Open match: ${segment.team_one.name} versus ${segment.team_two.name}`}
+    ></a>
     {#if segment.status == "upcoming"}
         <div
-            class="z-[1] bg-black/40 text-white font-bold absolute inset-0 flex justify-center items-center"
+            class="pointer-events-none z-[1] bg-black/40 text-white font-bold absolute inset-0 flex justify-center items-center"
         >
-            {new Date(segment.timestamp).toLocaleString()}
+            {segment.timestamp ? new Date(segment.timestamp).toLocaleString() : "Time to be announced"}
         </div>
     {/if}
     <div
@@ -23,7 +36,7 @@
         class="h-full border-x-8 relative bg-gray-100 py-2 px-3 flex items-start gap-4"
     >
         <div
-            class="text-gray-200/40 text-[14rem] lg:text-[16rem] font-bold absolute inset-0 flex justify-center items-center"
+            class="text-gray-200/40 text-8xl lg:text-9xl font-bold absolute inset-0 flex justify-center items-center"
         >
             VS
         </div>
@@ -38,7 +51,7 @@
                 ></div>
             {/if}
         {/if}
-        <div class="relative w-full flex flex-col justify-between h-full">
+        <div class="pointer-events-none relative z-[2] w-full flex flex-col justify-between h-full">
             <div>
                 {#if segment.team_two.score !== null}
                     <div
@@ -57,28 +70,32 @@
                         class="text-left text-sm md:text-xl font-bold flex items-center gap-1.5"
                     >
                         <img
-                            src={segment.team_one.icon ?? "/vlr.png"}
+                            src={proxyImage(segment.team_one.icon)}
                             class="aspect-square"
                             alt=""
                             width="35"
-                            on:error={() => (this.src = "/vlr.png")}
+                            on:error={fallbackImage}
                         />
-                        <h4>
-                            {segment.team_one.name}
-                        </h4>
+                        {#if segment.team_one.id}
+                            <a class="hover:text-vlr" href={`/teams/${segment.team_one.id}`}>{segment.team_one.name}</a>
+                        {:else}
+                            <h4>{segment.team_one.name}</h4>
+                        {/if}
                     </div>
                     <div
                         class="text-right text-sm md:text-xl font-bold flex items-center gap-1.5"
                     >
-                        <h4>
-                            {segment.team_two.name}
-                        </h4>
+                        {#if segment.team_two.id}
+                            <a class="hover:text-vlr" href={`/teams/${segment.team_two.id}`}>{segment.team_two.name}</a>
+                        {:else}
+                            <h4>{segment.team_two.name}</h4>
+                        {/if}
                         <img
-                            src={segment.team_two.icon ?? "/vlr.png"}
+                            src={proxyImage(segment.team_two.icon)}
                             class="aspect-square"
                             alt=""
                             width="35"
-                            on:error={() => (this.src = "/vlr.png")}
+                            on:error={fallbackImage}
                         />
                     </div>
                 </div>
@@ -88,15 +105,17 @@
             >
                 <div class="flex gap-1 items-center">
                     <img
-                        src={segment.event.icon ?? "/vlr.png"}
+                        src={proxyImage(segment.event.icon)}
                         class="aspect-square"
                         alt=""
                         width="15"
-                        on:error={() => (this.src = "/vlr.png")}
+                        on:error={fallbackImage}
                     />
-                    <p class="line-clamp-1 text-xs">
-                        {segment.event.name}
-                    </p>
+                    {#if segment.event.id}
+                        <a class="line-clamp-1 text-xs hover:text-vlr" href={`/events/${segment.event.id}`}>{segment.event.name}</a>
+                    {:else}
+                        <p class="line-clamp-1 text-xs">{segment.event.name}</p>
+                    {/if}
                 </div>
                 <p class="line-clamp-1 text-xs pl-1">
                     {segment.event.round}
@@ -104,9 +123,15 @@
             </div>
         </div>
     </div>
-</div>
+</article>
 
 <style>
+    .card-hit-area {
+        @apply absolute inset-0 z-[1] rounded focus:outline-none focus:ring-2 focus:ring-inset focus:ring-vlr;
+    }
+    .pointer-events-none a {
+        @apply pointer-events-auto relative;
+    }
     .__waiting {
         @apply border-gray-200;
     }

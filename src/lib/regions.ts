@@ -1,0 +1,15 @@
+export const REGIONS = [
+  { code: "north-america", label: "North America" },
+  { code: "europe", label: "Europe" },
+  { code: "asia-pacific", label: "Asia Pacific" },
+  { code: "japan", label: "Japan" },
+  { code: "korea", label: "Korea" },
+  { code: "china", label: "China" },
+  { code: "oceania", label: "Oceania" },
+  { code: "mena", label: "MENA" },
+  { code: "brazil", label: "Brazil" },
+  { code: "la-n", label: "LATAM North" },
+  { code: "la-s", label: "LATAM South" },
+  { code: "gc", label: "Game Changers" },
+  { code: "collegiate", label: "Collegiate" },
+] as const;

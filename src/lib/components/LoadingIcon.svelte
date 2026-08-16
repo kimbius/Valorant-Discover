@@ -1,3 +1,4 @@
+<script lang="ts"></script>
 <div class="lds-dual-ring"></div>
 
 <style type="postcss">

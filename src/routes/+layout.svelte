@@ -1,7 +1,7 @@
-<script>
+<script lang="ts">
   import "../app.postcss";
 
-  import { navigating, page } from "$app/stores";
+  import { navigating } from "$app/stores";
   import LoadingOverlay from "$components/LoadingOverlay.svelte";
   import MainNavbar from "$components/Navbar/MainNavbar.svelte";
   $: loading = !!$navigating;

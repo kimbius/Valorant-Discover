@@ -1,10 +1,12 @@
-<script>
+<script lang="ts">
+    import type { NewsSegment } from "$lib/types";
     import Container from "$components/Container.svelte";
     import MainHeader from "$components/MainHeader.svelte";
 
     import { page } from "$app/stores";
 
-    $: ({ segments } = $page.data);
+    let segments: NewsSegment[] = [];
+    $: segments = (($page.data as { segments?: NewsSegment[] }).segments ?? []);
 </script>
 
 <MainHeader subtitle="NEWS" />
@@ -32,6 +34,7 @@
                                     </p>
                                     <a
                                         class="text-sm text-main-800"
+                                        aria-label="Open article"
                                         target="_"
                                         href={`//vlr.gg${segment.url_path}`}
                                     >
