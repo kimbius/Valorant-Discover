@@ -1,3 +1,4 @@
+import { env } from "$env/dynamic/public";
 import type {
   EventDetail,
   EventsResponse,
@@ -10,7 +11,7 @@ import type {
   TeamDetail,
 } from "$lib/types";
 
-const API_BASE_URL = (import.meta.env.PUBLIC_API_BASE_URL || "http://localhost:3000").replace(/\/$/, "");
+const API_BASE_URL = (env.PUBLIC_API_BASE_URL || "http://localhost:3000").replace(/\/$/, "");
 
 export class ApiError extends Error {
   constructor(
